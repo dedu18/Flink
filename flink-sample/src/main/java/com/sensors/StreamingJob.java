@@ -18,24 +18,12 @@
 
 package com.sensors;
 
-import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
-import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.common.state.ValueState;
-import org.apache.flink.api.common.state.ValueStateDescriptor;
-import org.apache.flink.configuration.Configuration;
+import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.ParallelSourceFunction;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
-import org.apache.flink.streaming.api.functions.source.SocketTextStreamFunction;
-import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.util.Collector;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * WordCount Demo
@@ -54,10 +42,12 @@ public class StreamingJob {
 
   /**
    * 数据流运行入口，输入数据使用nc -l port
+   *
    * @param args
    * @throws Exception
    */
   public static void main(String[] args) throws Exception {
+    ParameterTool.fromArgs(args);
     // 获取当前环境上下文
     final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
